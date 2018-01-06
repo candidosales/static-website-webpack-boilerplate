@@ -1,12 +1,15 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const srcPath = path.join(__dirname, '/src');
-const distPath = path.join(__dirname, '/dist');
+const srcPath = path.join(__dirname, 'src');
+const distPath = path.join(__dirname, 'dist');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-// const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
+
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
@@ -14,17 +17,44 @@ const precss = require('precss');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
-    watch: true,
+    // watch: true,
     cache: true,
-    devtool: '#cheap-module-eval-source-map',
+    // devtool: '#cheap-module-eval-source-map',
     context: srcPath,
     entry: {
         app: './js/index.js',
     },
-    output: {
-        path: distPath,
-        filename: '[name].bundle.js',
-    },
+    /**
+         * Options affecting the output of the compilation.
+         *
+         * See: http://webpack.github.io/docs/configuration.html#output
+         */
+        output: {
+					
+											/**
+											 * The output directory as absolute path (required).
+											 *
+											 * See: http://webpack.github.io/docs/configuration.html#output-path
+											 */
+											path: distPath,
+					
+											/**
+											 * Specifies the name of each output file on disk.
+											 * IMPORTANT: You must not specify an absolute path here!
+											 *
+											 * See: http://webpack.github.io/docs/configuration.html#output-filename
+											 */
+											filename: '[name].[chunkhash].bundle.js',
+				
+											/**
+											 * The filename of non-entry chunks as relative path
+											 * inside the output.path directory.
+											 *
+											 * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
+											 */
+											chunkFilename: '[name].[chunkhash].chunk.js'
+					
+									},
     resolve: {
         modules: ["node_modules"],
     },
@@ -56,25 +86,64 @@ module.exports = {
             /*
              * File loader for supporting images, for example, in CSS files.
              */
-            {
-                test: /\.(jpg|png|gif)$/,
-                use: 'file-loader'
-            },
+            // {
+            //     test: /\.(jpe?g|png|gif)$/,
+            //     use: 'file-loader'
+            // },
+
+						{
+							test: /\.(gif|png|jpe?g|svg)$/i,
+							use: [
+								'file-loader?file?name=img/[name].[ext]',
+								{
+									loader: 'image-webpack-loader',
+									options: {
+										gifsicle: {
+											interlaced: false,
+										},
+										optipng: {
+											optimizationLevel: 7,
+										},
+										pngquant: {
+											quality: '65-90',
+											speed: 4
+										},
+										mozjpeg: {
+											progressive: true,
+											quality: 65
+										},
+										// Specifying webp here will create a WEBP version of your JPG/PNG images
+										webp: {
+											quality: 75
+										}
+									},
+								},
+							],
+						},
 
             /* File loader for supporting fonts, for example, in CSS files.
              */
             {
-                test: /\.(eot|woff2?|svg|ttf)([\?]?.*)$/,
+                test: /\.(eot|woff2?|ttf)([\?]?.*)$/,
                 use: 'file-loader'
             }
         ]
     },
     plugins: [
         // new webpack.NoEmitOnErrorsPlugin(),
-        new CleanWebpackPlugin([distPath]),
+        new CleanWebpackPlugin(['./dist/*']),
         new HtmlWebpackPlugin({
-            template: './index.html'
-        }),
+						title: 'MoneyEx - Embrace the Future - São Paulo',					
+						template: './index.html',
+						minify: {
+							caseSensitive: true,
+							collapseWhitespace: true,
+							keepClosingSlash: true
+						}
+				}),
+				new UglifyJSPlugin({
+					sourceMap: false
+				}),
         /**
          * Plugin: CompressionPlugin
          * Description: Prepares compressed versions of assets to serve
@@ -98,10 +167,8 @@ module.exports = {
             from: './robots.txt'
         }, {
             from: './favicon.ico'
-        }, {
-            from: './img/**/*',
-            to: './'
         }]),
+				new ManifestPlugin()
     ],
     /**
      * Webpack Development Server configuration
