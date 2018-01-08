@@ -31,9 +31,6 @@ body {
     text-align: center;
     letter-spacing: -5.5px;
     margin: 0 0 20px 0;
-    @include breakpoint(mobileonly) {
-        font-size: 60px;
-    }
 }
 
 .subtitle {
@@ -118,7 +115,19 @@ body {
 @media (max-aspect-ratio: 16/9) {
     .video-foreground {
         width: 300%;
-        left: -100%;
+    }
+}
+
+.video-foreground,
+.video-background iframe {
+    @include breakpoint(mobileonly) {
+        position: absolute;
+        top: 0;
+        left: -5%;
+        width: 110%;
+        height: 110%;
+        pointer-events: none;
+        transform: translate(0%, 0%);
     }
 }
 
@@ -169,5 +178,8 @@ body {
         font-size: 120px;
         font-weight: bold;
         letter-spacing: -5.5px;
+        @include breakpoint(mobileonly) {
+            font-size: 50px;
+        }
     }
 }

@@ -45,6 +45,8 @@ module.exports = merge(common, {
         new UglifyJSPlugin({
             sourceMap: false,
             uglifyOptions: {
+                ie8: true,
+                ecma: 5,
                 output: {
                     comments: false,
                     beautify: false
@@ -70,13 +72,5 @@ module.exports = merge(common, {
             from: './src/img/icon_192x192.png',
             to: './img'
         }])
-    ],
-    node: {
-        global: true,
-        crypto: 'empty',
-        process: true,
-        module: false,
-        clearImmediate: false,
-        setImmediate: false
-    }
+    ]
 });

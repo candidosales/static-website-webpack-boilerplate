@@ -1,4 +1,6 @@
 const path = require('path');
+const webpack = require("webpack");
+
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest')
@@ -7,7 +9,14 @@ const precss = require('precss');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
+    resolve: {
+        modules: ["node_modules"],
+        alias: {
+            jquery: 'js/jquery-3.2.1.min.js',
+        }
+    },
     entry: {
+        vendors: ['jquery'],
         app: './src/js/index.js'
     },
     output: {
@@ -15,8 +24,8 @@ module.exports = {
         filename: '[name].[chunkhash].bundle.js',
         chunkFilename: '[name].[chunkhash].chunk.js'
     },
-    resolve: {
-        modules: ["node_modules"],
+    externals: {
+        jquery: 'jQuery'
     },
     module: {
         rules: [{
@@ -63,6 +72,11 @@ module.exports = {
     plugins: [
         // new webpack.NoEmitOnErrorsPlugin(),
         new CleanWebpackPlugin(['./dist/*']),
+        new webpack.ProvidePlugin({
+            jQuery: "jquery",
+            'window.jQuery': "jquery"
+        }),
+        new webpack.optimize.CommonsChunkPlugin({ name: 'vendors', filename: 'js/vendors.js', minChunks: Infinity }),
         new HtmlWebpackPlugin({
             title: 'MoneyEx - Embrace the Future - São Paulo',
             template: './src/index.html'

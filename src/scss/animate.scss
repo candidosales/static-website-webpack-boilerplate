@@ -20,7 +20,7 @@
 
 .fadeInUp {
     animation-name: fadeInUp;
-    animation-delay: 3s;
+    animation-delay: 2s;
 }
 
 @keyframes fadeIn {
@@ -50,5 +50,18 @@
 
 .fadeInDown {
     animation-name: fadeInDown;
-    animation-delay: 4.5s;
+    animation-delay: 3.5s;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.fadeOut {
+    animation-name: fadeOut;
 }
