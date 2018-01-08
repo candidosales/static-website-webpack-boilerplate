@@ -1,5 +1,6 @@
 @import "~bootstrap/scss/bootstrap-grid";
 @import "mixins";
+@import "animate";
 * {
     box-sizing: border-box;
 }
@@ -10,10 +11,6 @@ body {
 }
 
 .bg-full {
-    // background-image: url(../img/bg.png);
-    // background-repeat: no-repeat;
-    // background-size: 100%;
-    // background-attachment: fixed;
     background: url(../img/bg.png) no-repeat center center fixed;
     background-size: cover;
     height: 100%;
@@ -28,13 +25,12 @@ body {
     background-color: #cfd8dc;
 }
 
-.title,
 .subtitle {
-    font-size: 120px;
-    font-weight: bold;
+    opacity: 0;
     color: #fff;
     text-align: center;
     letter-spacing: -5.5px;
+    margin: 0 0 20px 0;
     @include breakpoint(mobileonly) {
         font-size: 60px;
     }
@@ -42,7 +38,7 @@ body {
 
 .subtitle {
     font-size: 27px;
-    font-weight: lighter;
+    font-weight: 100;
     letter-spacing: -0.5px;
     @include breakpoint(mobileonly) {
         font-size: 18px;
@@ -102,12 +98,15 @@ body {
 
 .video-foreground,
 .video-background iframe {
-    position: absolute;
-    top: 0;
-    left: -5%;
-    width: 110%;
-    height: 110%;
-    pointer-events: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translate(-50%, -50%);
 }
 
 @media (min-aspect-ratio: 16/9) {
@@ -120,5 +119,55 @@ body {
     .video-foreground {
         width: 300%;
         left: -100%;
+    }
+}
+
+.cursor {
+    display: block;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: -5px;
+    width: 2px;
+    /* Change colour of Cursor Here */
+    background-color: white;
+    z-index: 1;
+    animation: flash 0.5s none infinite alternate;
+}
+
+@keyframes flash {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+// .headline {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     margin: 0px;
+//     color: white;
+//     text-align: center;
+//     width: 100%;
+// }
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.headline {
+    margin: 20px;
+    color: white;
+    font-size: 32px;
+    text-align: center;
+    h1 {
+        margin: 0 0 20px 0;
+        font-size: 120px;
+        font-weight: bold;
+        letter-spacing: -5.5px;
     }
 }

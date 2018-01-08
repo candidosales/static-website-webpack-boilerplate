@@ -61,9 +61,14 @@ module.exports = merge(common, {
         new CopyWebpackPlugin([{
             from: './src/robots.txt'
         }, {
-            from: './src/favicon.ico'
+            from: './src/img/favicon.ico',
+            to: './img'
         }, {
-            from: './src/img/metadata.png'
+            from: './src/img/metadata.png',
+            to: './img'
+        }, {
+            from: './src/img/icon_192x192.png',
+            to: './img'
         }])
     ],
     node: {

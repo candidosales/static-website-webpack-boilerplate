@@ -45,29 +45,9 @@ module.exports = {
             {
                 test: /\.(gif|png|jpe?g|svg)$/i,
                 use: [
-                    'file-loader?file?name=img/[name].[ext]',
+                    'file-loader?name=./img/[name].[ext]?[hash]',
                     {
-                        loader: 'image-webpack-loader',
-                        options: {
-                            gifsicle: {
-                                interlaced: false,
-                            },
-                            optipng: {
-                                optimizationLevel: 7,
-                            },
-                            pngquant: {
-                                quality: '65-90',
-                                speed: 4
-                            },
-                            mozjpeg: {
-                                progressive: true,
-                                quality: 65
-                            },
-                            // Specifying webp here will create a WEBP version of your JPG/PNG images
-                            webp: {
-                                quality: 75
-                            }
-                        },
+                        loader: 'image-webpack-loader'
                     },
                 ],
             },
@@ -88,7 +68,7 @@ module.exports = {
             template: './src/index.html'
         }),
         new WebpackPwaManifest({
-            name: 'MoneyEx - Embrace the Future',
+            name: 'MoneyEx',
             short_name: 'MoneyEx',
             description: 'Driving People, Technology, Finance and Design to Build an Exponencial Future.',
             background_color: '#134a6e',
