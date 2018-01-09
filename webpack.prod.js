@@ -9,27 +9,16 @@ const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
     module: {
-        rules: [
-            // {
-            // 	test: /\.css$/,
-            // 	use: ExtractTextPlugin.extract({
-            // 		fallback: 'style-loader',
-            // 		use: [
-            // 			{ loader: 'css-loader', options: { minimize: true } }
-            // 		]
-            // 	})
-            // },
-            {
-                test: /\.*(sass|scss)$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        { loader: 'css-loader', options: { minimize: true } },
-                        { loader: 'sass-loader' }
-                    ]
-                })
-            },
-        ]
+        rules: [{
+            test: /\.*(sass|scss)$/,
+            use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: [
+                    { loader: 'css-loader', options: { minimize: true } },
+                    { loader: 'sass-loader' }
+                ]
+            })
+        }, ]
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -41,7 +30,11 @@ module.exports = merge(common, {
             // 	keepClosingSlash: true
             // }
         }),
-        new ExtractTextPlugin('[name].[contenthash].css'),
+        new ExtractTextPlugin({
+            filename: '[name].[contenthash].css',
+            disable: false,
+            allChunks: true,
+        }),
         new UglifyJSPlugin({
             sourceMap: false,
             uglifyOptions: {
@@ -61,6 +54,8 @@ module.exports = merge(common, {
             minRatio: 0.8
         }),
         new CopyWebpackPlugin([{
+            from: './src/google2d8732aaf3fcf28d.html'
+        }, {
             from: './src/robots.txt'
         }, {
             from: './src/img/favicon.ico',

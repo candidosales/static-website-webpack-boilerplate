@@ -1,34 +1,30 @@
 const path = require('path');
 const webpack = require("webpack");
 
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest')
 
 const precss = require('precss');
 const autoprefixer = require('autoprefixer');
 
+var basePath = __dirname;
+
+
 module.exports = {
-    resolve: {
-        modules: ["node_modules"],
-        alias: {
-            jquery: 'js/jquery-3.2.1.min.js',
-        }
-    },
     entry: {
-        vendors: ['jquery'],
-        app: './src/js/index.js'
+        app: './src/js/index.js',
+        vendor: ['jquery']
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].[chunkhash].bundle.js',
-        chunkFilename: '[name].[chunkhash].chunk.js'
-    },
-    externals: {
-        jquery: 'jQuery'
+        path: path.resolve(basePath, 'dist'),
+        filename: '[chunkhash].[name].js'
     },
     module: {
         rules: [{
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+            }, {
                 test: /\.html$/,
                 use: 'html-loader'
             }, {
@@ -66,21 +62,25 @@ module.exports = {
             {
                 test: /\.(eot|woff2?|ttf)([\?]?.*)$/,
                 use: 'file-loader'
-            }
+            },
         ]
     },
     plugins: [
-        // new webpack.NoEmitOnErrorsPlugin(),
-        new CleanWebpackPlugin(['./dist/*']),
+        new HtmlWebpackPlugin({
+            title: 'MoneyEx - Embrace the Future - São Paulo',
+            template: './src/index.html',
+            filename: './src/index.html',
+            hash: true
+        }),
         new webpack.ProvidePlugin({
+            $: 'jquery',
             jQuery: "jquery",
             'window.jQuery': "jquery"
         }),
-        new webpack.optimize.CommonsChunkPlugin({ name: 'vendors', filename: 'js/vendors.js', minChunks: Infinity }),
-        new HtmlWebpackPlugin({
-            title: 'MoneyEx - Embrace the Future - São Paulo',
-            template: './src/index.html'
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ['vendor', 'manifest'],
         }),
+        new webpack.HashedModuleIdsPlugin(),
         new WebpackPwaManifest({
             name: 'MoneyEx',
             short_name: 'MoneyEx',
@@ -90,6 +90,7 @@ module.exports = {
                 src: path.resolve('src/img/logo-1024x1024.png'),
                 sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
             }]
-        })
+        }),
+        new webpack.HashedModuleIdsPlugin()
     ]
 };

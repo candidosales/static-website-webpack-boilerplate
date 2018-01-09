@@ -1,5 +1,4 @@
 import "../scss/style.scss";
-import $ from 'jquery';
 
 function autoType(elementClass, typingSpeed) {
     var element = $(elementClass);
