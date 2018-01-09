@@ -29,3 +29,6 @@ npm run build
 
 ## License
 [MIT](LICENSE)
+
+## 
+https://github.com/Lemoncode/webpack-3.x-by-sample

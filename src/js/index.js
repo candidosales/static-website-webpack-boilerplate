@@ -43,6 +43,9 @@ $(document).ready(function() {
 
     setTimeout(function() {
         $('#loadOverlay').addClass('fadeOut');
+        setTimeout(function() {
+            $('#loadOverlay').addClass('height-zero');
+        }, 500);
         autoType(".type-js", 150);
     }, 1000);
 });
