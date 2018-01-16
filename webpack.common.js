@@ -67,7 +67,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'MoneyEx - Embrace the Future - São Paulo',
+            title: 'Money Ex - Embrace the Future - São Paulo',
             template: './src/index.html',
             filename: './src/index.html',
             hash: true
@@ -82,8 +82,8 @@ module.exports = {
         }),
         new webpack.HashedModuleIdsPlugin(),
         new WebpackPwaManifest({
-            name: 'MoneyEx',
-            short_name: 'MoneyEx',
+            name: 'Money Ex',
+            short_name: 'Money Ex',
             description: 'Driving People, Technology, Finance and Design to Build an Exponencial Future.',
             background_color: '#134a6e',
             icons: [{

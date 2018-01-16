@@ -22,7 +22,7 @@ module.exports = merge(common, {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'MoneyEx - Embrace the Future - São Paulo',
+            title: 'Money Ex - Embrace the Future - São Paulo',
             template: './src/index.html',
             // minify: {
             // 	caseSensitive: true,

@@ -11,7 +11,7 @@ function autoType(elementClass, typingSpeed) {
     var text = element.text().trim().split('');
     var amntOfChars = text.length;
     var newString = "";
-    element.text("|");
+    element.text("");
     setTimeout(function() {
         element.css("opacity", 1);
         element.prev().removeAttr("style");
