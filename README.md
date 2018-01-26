@@ -27,6 +27,13 @@ For distribution folder run the following command and it will create a dist fold
 npm run build
 ```
 
+## Deploy
+
+```sh
+cd ci-scripts
+bash deploy-prod.sh
+```
+
 ## License
 [MIT](LICENSE)
 
