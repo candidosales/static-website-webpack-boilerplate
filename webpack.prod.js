@@ -66,6 +66,9 @@ module.exports = merge(common, {
         }, {
             from: './src/img/icon_192x192.png',
             to: './img'
+        }, {
+            from: './.well-known',
+            to: './.well-known'
         }])
     ]
 });

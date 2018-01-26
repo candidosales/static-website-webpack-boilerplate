@@ -34,8 +34,23 @@ cd ci-scripts
 bash deploy-prod.sh
 ```
 
+## Build local
+```sh
+docker build . -t moneyex-site
+```
+
+## Test local
+```sh
+docker run -p 80:80 -p 443:443 -d moneyex-site
+```
+
+## Remove image docker
+```sh
+docker image rm 5b32d0cf2cdc -f  
+```
+
 ## License
 [MIT](LICENSE)
 
-## 
-https://github.com/Lemoncode/webpack-3.x-by-sample
+## SSL
+https://www.sslforfree.com/
