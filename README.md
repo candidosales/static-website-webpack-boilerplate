@@ -49,6 +49,12 @@ docker run -p 80:80 -p 443:443 -d moneyex-site
 docker image rm 5b32d0cf2cdc -f  
 ```
 
+## Access SSH
+
+```sh
+ssh money-ex-website@52.234.145.175
+```
+
 ## License
 [MIT](LICENSE)
 
