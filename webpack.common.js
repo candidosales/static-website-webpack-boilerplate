@@ -16,7 +16,7 @@ module.exports = {
         vendor: ['jquery']
     },
     output: {
-        path: path.resolve(basePath, 'dist'),
+        path: path.resolve(basePath, 'dist/'),
         filename: '[chunkhash].[name].js'
     },
     module: {
@@ -67,7 +67,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Your site',
+            title: 'Money Ex - Embrace the Future - São Paulo',
             template: './src/index.html',
             filename: './src/index.html',
             hash: true
@@ -77,10 +77,13 @@ module.exports = {
             jQuery: "jquery",
             'window.jQuery': "jquery"
         }),
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ['vendor', 'manifest'],
+        }),
         new WebpackPwaManifest({
-            name: 'Your site',
-            short_name: 'Your site',
-            description: 'Description',
+            name: 'Money Ex',
+            short_name: 'Money Ex',
+            description: 'Driving People, Technology, Finance and Design to Build an Exponencial Future.',
             background_color: '#134a6e',
             icons: [{
                 src: path.resolve('src/img/logo-1024x1024.png'),

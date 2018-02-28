@@ -61,9 +61,6 @@ module.exports = merge(common, {
             from: './src/img/favicon.ico',
             to: './img'
         }, {
-            from: './src/img/metadata.png',
-            to: './img'
-        }, {
             from: './src/img/icon_192x192.png',
             to: './img'
         }, {

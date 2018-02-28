@@ -5,5 +5,5 @@ $(document).ready(function() {
     // class of outer div
     // The second paramter is the speed between each letter is typed.   
 
-    console.log('Hi  0x1F603'); 
+    console.log('Hi oi'); 
 });
