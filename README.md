@@ -2,19 +2,22 @@
 
 Static website boilterplate built using Webpack. This boilterplate features following:
 
-- Webpack
+- Webpack 4 with config to PWA
 - ES6
-- Bootstrap
+- Bootstrap 4
 - Font Awesome
 - Sass
 - Live reload using Browsersync
+- Docker
+- NGINX + HTTPS
+- Deploy Azure
 
 ## Getting Started
 
 Clone the repo
 
 ```sh
-git clone https://github.com/binoy14/static-website-webpack-boilerplate.git
+git clone https://github.com/candidosales/static-website-webpack-boilerplate.git
 ```
 
 Run script to start devlopment
@@ -36,23 +39,17 @@ bash deploy-prod.sh
 
 ## Build local
 ```sh
-docker build . -t moneyex-site
+docker build . -t your-site
 ```
 
 ## Test local
 ```sh
-docker run -p 80:80 -p 443:443 -d moneyex-site
+docker run -p 80:80 -p 443:443 -d your-site
 ```
 
 ## Remove image docker
 ```sh
 docker image rm 5b32d0cf2cdc -f  
-```
-
-## Access SSH
-
-```sh
-ssh money-ex-website@52.234.145.175
 ```
 
 ## License

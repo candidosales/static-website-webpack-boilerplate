@@ -1,10 +1,10 @@
 #! /usr/bin/env bash
 npm run build
 
-project=moneyex-site
-containerUser=moneyexcontainerregistry
-containerPasssword=bK0DWvJyBqervbNouBZq/MEqMpSn0j7S
-containerRepository=moneyexcontainerregistry.azurecr.io
+project=your-site
+containerUser=your-container-registry
+containerPasssword=your-password-container
+containerRepository=your-container-registry.azurecr.io
 
 . ./deploy-common.sh 
 

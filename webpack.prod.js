@@ -22,7 +22,7 @@ module.exports = merge(common, {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Money Ex - Embrace the Future - São Paulo',
+            title: 'Your site',
             template: './src/index.html',
             // minify: {
             // 	caseSensitive: true,
@@ -54,7 +54,7 @@ module.exports = merge(common, {
             minRatio: 0.8
         }),
         new CopyWebpackPlugin([{
-            from: './src/google2d8732aaf3fcf28d.html'
+            from: './src/googleXXXXXXXXXXXXXXXXX.html'
         }, {
             from: './src/robots.txt'
         }, {
